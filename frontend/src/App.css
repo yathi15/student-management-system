@@ -1,0 +1,2334 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  width: 100%;
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 50px;
+
+  background: #2563eb;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  padding: 10px 15px;
+
+  border-radius: 8px;
+
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 50px 40px 80px;
+
+  text-align: center;
+}
+
+.dashboard h1 {
+  font-size: 44px;
+  font-weight: 700;
+
+  color: #0f172a;
+
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #64748b;
+
+  margin-bottom: 40px;
+}
+
+
+/* =========================================================
+   TOTAL STUDENTS
+========================================================= */
+
+.total-card {
+  width: 100%;
+
+  background: white;
+
+  padding: 30px;
+
+  margin-bottom: 30px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+  transition: transform 0.2s ease;
+}
+
+.total-card:hover {
+  transform: translateY(-3px);
+}
+
+.total-card h2 {
+  font-size: 20px;
+  font-weight: 600;
+
+  color: #334155;
+
+  margin-bottom: 8px;
+}
+
+.total-card h3 {
+  font-size: 48px;
+
+  color: #2563eb;
+
+  margin: 5px 0;
+}
+
+.total-card p {
+  font-size: 16px;
+
+  color: #64748b;
+}
+
+
+/* =========================================================
+   COURSE CARDS
+========================================================= */
+
+.course-cards {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 22px;
+
+  margin-bottom: 45px;
+}
+
+.course-card {
+  background: white;
+
+  min-height: 200px;
+
+  padding: 30px 20px;
+
+  border-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+  transition: all 0.2s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.course-card h2 {
+  font-size: 22px;
+
+  color: #334155;
+
+  margin-bottom: 15px;
+}
+
+.course-card h3 {
+  font-size: 40px;
+
+  color: #2563eb;
+
+  margin-bottom: 8px;
+}
+
+.course-card p {
+  font-size: 16px;
+
+  color: #64748b;
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart-box {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  padding: 35px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.chart-box h2 {
+  font-size: 23px;
+
+  color: #334155;
+
+  margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   PIE CHART
+========================================================= */
+
+.pie-chart {
+  width: 280px;
+  height: 280px;
+
+  margin: 0 auto 30px;
+
+  border-radius: 50%;
+
+  position: relative;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+  border: 8px solid white;
+}
+
+
+/* Donut center */
+
+.pie-chart::after {
+  content: "";
+
+  position: absolute;
+
+  width: 105px;
+  height: 105px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.legend {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.legend span {
+  padding: 9px 13px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  font-size: 15px;
+
+  color: #334155;
+}
+
+
+/* =========================================================
+   GENERAL PAGE
+========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 50px 40px 80px;
+}
+
+.page-container h1 {
+  text-align: center;
+
+  font-size: 42px;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  text-align: center;
+
+  font-size: 18px;
+
+  color: #64748b;
+
+  margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   STUDENT FILTERS
+========================================================= */
+
+.student-filters {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+
+  margin-bottom: 20px;
+}
+
+.search-box {
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+
+  padding: 13px 16px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  font-size: 15px;
+
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.student-filters select {
+  padding: 13px 16px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  background: white;
+
+  font-size: 15px;
+
+  color: #334155;
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.student-filters select:focus {
+  border-color: #2563eb;
+}
+
+.reset-button {
+  padding: 13px 20px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #64748b;
+
+  color: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.reset-button:hover {
+  background: #475569;
+}
+
+
+/* =========================================================
+   STUDENT COUNT
+========================================================= */
+
+.student-count {
+  color: #64748b;
+
+  font-size: 15px;
+
+  margin-bottom: 15px;
+
+  text-align: right;
+}
+
+.student-count strong {
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   STUDENT TABLE
+========================================================= */
+
+.student-table-container {
+  width: 100%;
+
+  background: white;
+
+  border-radius: 16px;
+
+  overflow-x: auto;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.student-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+
+  text-align: left;
+}
+
+.student-table thead {
+  background: #2563eb;
+
+  color: white;
+}
+
+.student-table th {
+  padding: 17px 18px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.student-table td {
+  padding: 17px 18px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  font-size: 15px;
+
+  color: #334155;
+}
+
+.student-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.student-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.student-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   COURSE BADGE
+========================================================= */
+
+.course-badge {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   EDIT / DELETE BUTTONS
+========================================================= */
+
+.edit-button,
+.delete-button {
+  border: none;
+
+  padding: 8px 14px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  margin-right: 8px;
+
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.edit-button:hover {
+  background: #bfdbfe;
+
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.delete-button:hover {
+  background: #fecaca;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+========================================================= */
+
+.empty-message {
+  background: white;
+
+  padding: 50px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   ADD / EDIT STUDENT FORM
+========================================================= */
+
+.add-student-page {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding-top: 50px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 650px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-card h1 {
+  text-align: center;
+
+  font-size: 38px;
+
+  color: #0f172a;
+
+  margin-bottom: 10px;
+}
+
+.form-card .page-subtitle {
+  margin-bottom: 35px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: #334155;
+
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  font-size: 16px;
+
+  background: white;
+
+  color: #1e293b;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.add-student-button {
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.add-student-button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    padding: 0 30px;
+  }
+
+  .course-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    padding: 18px 20px;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 21px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+
+    padding: 8px 10px;
+  }
+
+  .dashboard {
+    padding: 35px 15px 60px;
+  }
+
+  .dashboard h1 {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+
+  .course-cards {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .chart-box {
+    padding: 25px 15px;
+  }
+
+  .pie-chart {
+    width: 240px;
+    height: 240px;
+  }
+
+  .page-container {
+    padding: 35px 15px 60px;
+  }
+
+  .page-container h1 {
+    font-size: 34px;
+  }
+
+  .student-filters {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .student-filters select,
+  .reset-button {
+    width: 100%;
+  }
+
+  .student-count {
+    text-align: left;
+  }
+
+  .form-card {
+    padding: 25px 20px;
+  }
+
+  .form-card h1 {
+    font-size: 32px;
+  }
+
+}
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: calc(100vh - 72px);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #f8fafc
+    );
+}
+
+.login-card {
+  width: 100%;
+
+  max-width: 440px;
+
+  background: white;
+
+  padding: 45px 40px;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.12);
+
+  text-align: center;
+}
+
+.login-icon {
+  width: 75px;
+
+  height: 75px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #dbeafe;
+
+  border-radius: 50%;
+
+  font-size: 36px;
+}
+
+.login-card h1 {
+  font-size: 32px;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: #64748b;
+
+  font-size: 15px;
+
+  margin-bottom: 30px;
+}
+
+.login-group {
+  text-align: left;
+
+  margin-bottom: 20px;
+}
+
+.login-group label {
+  display: block;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #334155;
+
+  margin-bottom: 8px;
+}
+
+.login-group input {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.login-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.password-box {
+  display: flex;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+.password-box input {
+  border: none;
+
+  flex: 1;
+}
+
+.password-box input:focus {
+  box-shadow: none;
+}
+
+.password-box button {
+  border: none;
+
+  background: white;
+
+  padding: 0 14px;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.login-button {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.login-button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+.login-demo {
+  margin-top: 25px;
+
+  font-size: 13px;
+
+  color: #94a3b8;
+}
+
+
+/* LOGIN MOBILE */
+
+@media (max-width: 500px) {
+
+  .login-card {
+    padding: 35px 22px;
+  }
+
+  .login-card h1 {
+    font-size: 28px;
+  }
+
+}
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5,
+      #7c3aed
+    );
+}
+
+
+/* Login Card */
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  padding: 45px 40px;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.25);
+
+  text-align: center;
+}
+
+
+/* Icon */
+
+.login-icon {
+  width: 75px;
+  height: 75px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #dbeafe;
+
+  border-radius: 50%;
+
+  font-size: 38px;
+}
+
+
+/* Heading */
+
+.login-card h1 {
+  font-size: 32px;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: #64748b;
+
+  font-size: 16px;
+
+  margin-bottom: 32px;
+}
+
+
+/* Form */
+
+.login-form-group {
+  text-align: left;
+
+  margin-bottom: 20px;
+}
+
+.login-form-group label {
+  display: block;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #334155;
+
+  margin-bottom: 8px;
+}
+
+.login-form-group input {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.login-form-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* Login Button */
+
+.login-button {
+  width: 100%;
+
+  padding: 14px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.login-button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+
+/* Demo credentials */
+
+.login-demo {
+  margin-top: 25px;
+
+  font-size: 13px;
+
+  color: #64748b;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 35px 25px;
+  }
+
+  .login-card h1 {
+    font-size: 28px;
+  }
+}
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+.logout-button {
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  background: white;
+
+  color: #2563eb;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.logout-button:hover {
+  background: #dbeafe;
+
+  transform: translateY(-1px);
+}
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+.logout-button {
+  display: inline-block;
+
+  border: none;
+  outline: none;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  background: white;
+  color: #2563eb;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  background: #dbeafe;
+  transform: translateY(-2px);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f1f5f9;
+
+  padding: 30px;
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+  position: relative;
+  z-index: 10;
+}
+
+
+.login-icon {
+  text-align: center;
+
+  font-size: 55px;
+
+  margin-bottom: 15px;
+}
+
+
+.login-card h1 {
+  text-align: center;
+
+  font-size: 34px;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+
+.login-subtitle {
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 16px;
+
+  margin-bottom: 30px;
+}
+
+
+.login-form-group {
+  margin-bottom: 20px;
+}
+
+
+.login-form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #334155;
+}
+
+
+.login-form-group input {
+  display: block;
+
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #1e293b;
+
+  font-size: 16px;
+
+  outline: none;
+
+  position: relative;
+  z-index: 20;
+}
+
+
+.login-form-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+.login-button {
+  display: block;
+
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  position: relative;
+  z-index: 20;
+}
+
+
+.login-button:hover {
+  background: #1d4ed8;
+}
+
+
+.login-demo {
+  text-align: center;
+
+  margin-top: 20px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+/* =========================================================
+   MODERN LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1e3a8a 0%,
+      #2563eb 50%,
+      #06b6d4 100%
+    );
+}
+
+
+/* Login Card */
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+
+  padding: 45px 40px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.25);
+
+  position: relative;
+
+  z-index: 10;
+}
+
+
+/* Icon */
+
+.login-icon {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #dbeafe;
+
+  border-radius: 50%;
+
+  font-size: 42px;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.2);
+}
+
+
+/* Heading */
+
+.login-card h1 {
+  text-align: center;
+
+  font-size: 34px;
+
+  font-weight: 700;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+
+/* Subtitle */
+
+.login-subtitle {
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 16px;
+
+  margin-bottom: 32px;
+}
+
+
+/* Form */
+
+.login-form-group {
+  margin-bottom: 22px;
+}
+
+
+.login-form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #334155;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+/* Input */
+
+.login-form-group input {
+  display: block;
+
+  width: 100%;
+
+  padding: 15px 16px;
+
+  border: 2px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  color: #0f172a;
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+
+.login-form-group input::placeholder {
+  color: #94a3b8;
+}
+
+
+.login-form-group input:focus {
+  background: white;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+
+/* Login Button */
+
+.login-button {
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow:
+    0 8px 18px rgba(37, 99, 235, 0.3);
+}
+
+
+.login-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, 0.4);
+}
+
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+
+/* Bottom text */
+
+.login-demo {
+  text-align: center;
+
+  margin-top: 25px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 35px 25px;
+  }
+
+  .login-card h1 {
+    font-size: 30px;
+  }
+
+}
+/* =========================================================
+   PROFESSIONAL NAVBAR
+========================================================= */
+
+.navbar {
+  min-height: 72px;
+  padding: 0 6%;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0 5px 20px rgba(37, 99, 235, 0.25);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: white;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+
+  padding: 10px 15px;
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: white;
+  color: #2563eb;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.logout-button {
+  border: none;
+  cursor: pointer;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+
+  background: #ef4444;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.logout-button:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PROFESSIONAL PAGE BACKGROUND
+========================================================= */
+
+body {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.08),
+      transparent 30%
+    ),
+    #f8fafc;
+}
+
+
+/* =========================================================
+   CARD EFFECT
+========================================================= */
+
+.total-card,
+.course-card,
+.chart-box,
+.student-table-container,
+.form-card,
+.student-filters,
+.empty-message {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.total-card:hover,
+.chart-box:hover,
+.form-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(15, 23, 42, 0.10);
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+}
+/* =========================================================
+   FINAL PROFESSIONAL UI
+========================================================= */
+
+/* Smooth page appearance */
+main {
+  animation: pageFade 0.35s ease;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+  max-width: 1450px;
+  margin: auto;
+  padding: 55px 45px 80px;
+}
+
+.dashboard h1 {
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #0f172a;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 35px;
+}
+
+
+/* Total card */
+
+.total-card {
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #eff6ff
+  );
+
+  border: 1px solid #dbeafe;
+}
+
+
+
+/* =========================================================
+   COURSE CARDS
+========================================================= */
+
+.course-card {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid #e2e8f0;
+}
+
+.course-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #60a5fa
+  );
+}
+
+.course-card h2 {
+  font-weight: 700;
+}
+
+.course-card h3 {
+  font-size: 44px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart-box {
+  border: 1px solid #e2e8f0;
+}
+
+.chart-box h2 {
+  font-weight: 700;
+}
+
+.pie-chart {
+  width: 300px;
+  height: 300px;
+
+  box-shadow:
+    0 15px 35px rgba(15, 23, 42, 0.15);
+
+  transition: transform 0.3s ease;
+}
+
+.pie-chart:hover {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   STUDENTS PAGE
+========================================================= */
+
+.page-container {
+  max-width: 1450px;
+  margin: auto;
+
+  padding: 50px 45px 80px;
+}
+
+.page-container h1 {
+  font-size: 44px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+
+/* =========================================================
+   SEARCH / FILTER AREA
+========================================================= */
+
+.student-filters {
+  border: 1px solid #e2e8f0;
+}
+
+.search-box input,
+.student-filters select {
+  transition: all 0.2s ease;
+}
+
+.search-box input:hover,
+.student-filters select:hover {
+  border-color: #93c5fd;
+}
+
+
+/* =========================================================
+   STUDENT TABLE
+========================================================= */
+
+.student-table-container {
+  border: 1px solid #e2e8f0;
+
+  overflow: hidden;
+}
+
+.student-table thead {
+  background: linear-gradient(
+    135deg,
+    #1d4ed8,
+    #2563eb
+  );
+}
+
+.student-table th {
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.student-table td {
+  vertical-align: middle;
+}
+
+.student-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.student-table tbody tr:hover {
+  background: #eff6ff;
+}
+
+
+/* =========================================================
+   COURSE BADGES
+========================================================= */
+
+.course-badge {
+  background: #eff6ff;
+  color: #1d4ed8;
+
+  border: 1px solid #bfdbfe;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.edit-button,
+.delete-button {
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ADD / EDIT FORM
+========================================================= */
+
+.form-card {
+  border: 1px solid #e2e8f0;
+}
+
+.form-card h1 {
+  font-weight: 800;
+}
+
+.form-group input,
+.form-group select {
+  background: #f8fafc;
+
+  border: 1px solid #cbd5e1;
+
+  transition: all 0.2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  background: white;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
+.add-student-button {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  box-shadow:
+    0 6px 15px rgba(37, 99, 235, 0.25);
+
+  transition: all 0.25s ease;
+}
+
+.add-student-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(96, 165, 250, 0.4),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(29, 78, 216, 0.5),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #1e3a8a,
+      #2563eb
+    );
+}
+
+
+/* Login card */
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+
+  padding: 45px 40px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.3);
+
+  text-align: center;
+
+  animation: loginCard 0.5s ease;
+}
+
+@keyframes loginCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* Login icon */
+
+.login-icon {
+  width: 75px;
+  height: 75px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: #eff6ff;
+
+  font-size: 38px;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.15);
+}
+
+.login-card h1 {
+  font-size: 32px;
+  font-weight: 800;
+
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+
+/* Login form */
+
+.login-form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.login-form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #334155;
+}
+
+.login-form-group input {
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #f8fafc;
+
+  font-size: 15px;
+
+  transition: all 0.2s ease;
+}
+
+.login-form-group input:focus {
+  background: white;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+
+/* Login button */
+
+.login-button {
+  width: 100%;
+
+  padding: 14px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.25);
+
+  transition: all 0.25s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+.login-demo {
+  margin-top: 22px;
+
+  font-size: 13px;
+
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .dashboard,
+  .page-container {
+    padding: 35px 18px 60px;
+  }
+
+  .dashboard h1,
+  .page-container h1 {
+    font-size: 34px;
+  }
+
+  .total-card h3 {
+    font-size: 42px;
+  }
+
+  .course-card h3 {
+    font-size: 38px;
+  }
+
+  .pie-chart {
+    width: 240px;
+    height: 240px;
+  }
+
+  .login-card {
+    padding: 35px 25px;
+  }
+
+}
