@@ -9,9 +9,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # =========================================================
 
 app = Flask(__name__)
-
+CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 # Allow React frontend to communicate with Flask
-CORS(app)
 
 
 # =========================================================
@@ -398,6 +397,53 @@ def login():
 # =========================================================
 # START FLASK SERVER
 # =========================================================
+# -----------------------------------
+# REGISTER USER
+# -----------------------------------
+
+@app.route("/register", methods=["POST"])
+def register():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "message": "No data received"
+        }), 400
+
+    username = data.get("username", "").strip()
+    password = data.get("password", "")
+
+    if not username or not password:
+        return jsonify({
+            "message": "Username and password are required"
+        }), 400
+
+    # Check if username already exists
+    existing_user = User.query.filter_by(
+        username=username
+    ).first()
+
+    if existing_user:
+        return jsonify({
+            "message": "Username already exists"
+        }), 400
+
+    # Hash password before storing
+    hashed_password = generate_password_hash(password)
+
+    new_user = User(
+        username=username,
+        password=hashed_password
+    )
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Account created successfully",
+        "username": username
+    }), 201
 
 if __name__ == "__main__":
 
