@@ -340,7 +340,40 @@ def dashboard():
 # =========================================================
 # LOGIN
 # =========================================================
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
 
+    username = data.get("username", "").strip()
+    password = data.get("password", "").strip()
+
+    if not username or not password:
+        return jsonify({
+            "message": "Username and password are required"
+        }), 400
+
+    # Check if username already exists
+    existing_user = User.query.filter_by(username=username).first()
+
+    if existing_user:
+        return jsonify({
+            "message": "Username already exists"
+        }), 400
+
+    # Hash password and create user
+    hashed_password = generate_password_hash(password)
+
+    new_user = User(
+        username=username,
+        password=hashed_password
+    )
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Account created successfully"
+    }), 201
 @app.route("/login", methods=["POST"])
 def login():
 
