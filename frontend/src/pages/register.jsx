@@ -25,7 +25,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "https://student-management-system-1-wbm2.onrender.com/register",
+        "https://student-management-system-g306.onrender.com/register",
         {
           method: "POST",
 
