@@ -5,7 +5,7 @@ function Dashboard() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/dashboard")
+    fetch("https://student-management-system-g306.onrender.com/dashboard")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to load dashboard");
