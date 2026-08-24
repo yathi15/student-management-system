@@ -43,7 +43,7 @@ function AddStudent() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/students",
+        "https://student-management-system-g306.onrender.com/students",
         {
           method: "POST",
 
