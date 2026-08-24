@@ -18,7 +18,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/login",
+        "https://student-management-system-1-wbm2.onrender.com/login",
         {
           method: "POST",
 
