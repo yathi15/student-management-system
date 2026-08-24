@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Students from "./pages/Students";
 import AddStudent from "./pages/AddStudent";
 import EditStudent from "./pages/EditStudent";
+import Register from "./pages/register";
 
 import "./App.css";
 
@@ -60,6 +61,10 @@ function App() {
           path="/login"
           element={<Login />}
         />
+        <Route
+          path="/register"
+          element={<Register />}
+        />
 
 
         {/* ================= PROTECTED PAGES ================= */}
@@ -99,6 +104,7 @@ function App() {
           path="*"
           element={<Navigate to="/login" replace />}
         />
+        
 
       </Routes>
 

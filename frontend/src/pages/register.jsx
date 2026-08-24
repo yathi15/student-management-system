@@ -1,24 +1,31 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     // Check empty fields
-    if (!username || !password) {
-      alert("Please enter username and password");
+    if (!username || !password || !confirmPassword) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    // Check password match
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
       return;
     }
 
     try {
       const response = await fetch(
-        "https://student-management-system-1-wbm2.onrender.com/login",
+        "https://student-management-system-1-wbm2.onrender.com/register",
         {
           method: "POST",
 
@@ -36,30 +43,22 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        // Save login status
-        localStorage.setItem("isLoggedIn", "true");
+        alert("Account created successfully!");
 
-        // Save username
-        localStorage.setItem(
-          "username",
-          data.username || username
-        );
-
-        alert("Login successful!");
-
-        // Go to dashboard
-        navigate("/");
+        // Go to login page
+        navigate("/login");
       } else {
         alert(
-          data.message || "Invalid username or password"
+          data.message || "Registration failed"
         );
       }
     } catch (error) {
-      console.error("Login error:", error);
-
-      alert(
-        "Cannot connect to server. Please try again."
+      console.error(
+        "Registration error:",
+        error
       );
+
+      alert("Cannot connect to Flask server");
     }
   };
 
@@ -68,20 +67,17 @@ function Login() {
 
       <div className="login-card">
 
-        {/* Logo */}
         <div className="login-icon">
           🎓
         </div>
 
-        {/* Heading */}
-        <h1>Welcome Back</h1>
+        <h1>Create Account</h1>
 
         <p className="login-subtitle">
           Student Management System
         </p>
 
-        {/* Login Form */}
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
 
           {/* Username */}
           <div className="login-form-group">
@@ -92,7 +88,7 @@ function Login() {
 
             <input
               type="text"
-              placeholder="Enter username"
+              placeholder="Create username"
               value={username}
               onChange={(e) =>
                 setUsername(e.target.value)
@@ -110,7 +106,7 @@ function Login() {
 
             <input
               type="password"
-              placeholder="Enter password"
+              placeholder="Create password"
               value={password}
               onChange={(e) =>
                 setPassword(e.target.value)
@@ -119,31 +115,46 @@ function Login() {
 
           </div>
 
-          {/* Login Button */}
+          {/* Confirm Password */}
+          <div className="login-form-group">
+
+            <label>
+              Confirm Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) =>
+                setConfirmPassword(
+                  e.target.value
+                )
+              }
+            />
+
+          </div>
+
+          {/* Register Button */}
           <button
             type="submit"
             className="login-button"
           >
-            Login
+            Create Account
           </button>
 
         </form>
 
-        {/* Login information */}
-        <p className="login-demo">
-          Login using your registered account
-        </p>
+        {/* Login Link */}
+        <p className="register-link">
 
-        {/* Register Link */}
-        <div className="register-link">
+          Already have an account?{" "}
 
-          Don't have an account?{" "}
-
-          <Link to="/register">
-            Create Account
+          <Link to="/login">
+            Login
           </Link>
 
-        </div>
+        </p>
 
       </div>
 
@@ -151,4 +162,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
