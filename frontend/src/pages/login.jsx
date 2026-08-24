@@ -18,7 +18,7 @@ function Login() {
 
     try {
       const response = await fetch(
-       "https://student-management-system-g306.onrender.com/register",
+       "https://student-management-system-g306.onrender.com/login",
         {
           method: "POST",
 
