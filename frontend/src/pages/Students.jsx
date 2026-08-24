@@ -14,7 +14,7 @@ function Students() {
   // Fetch students
   const fetchStudents = () => {
 
-    fetch("http://127.0.0.1:5000/students")
+    fetch("https://student-management-system-g306.onrender.com/students")
       .then((response) => response.json())
       .then((data) => {
 
@@ -54,7 +54,7 @@ function Students() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/students/${id}`,
+        `https://student-management-system-g306.onrender.com/students/${id}`,
         {
           method: "DELETE",
         }
