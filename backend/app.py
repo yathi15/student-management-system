@@ -29,30 +29,11 @@ db = SQLAlchemy(app)
 
 class Student(db.Model):
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-    name = db.Column(
-        db.String(100),
-        nullable=False
-    )
-
-    email = db.Column(
-        db.String(100),
-        nullable=False
-    )
-
-    course = db.Column(
-        db.String(50),
-        nullable=False
-    )
-
-    year = db.Column(
-        db.String(20),
-        nullable=False
-    )
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    course = db.Column(db.String(50), nullable=False)
+    year = db.Column(db.String(20), nullable=False)
 
 
 # =========================================================
@@ -61,21 +42,28 @@ class Student(db.Model):
 
 class User(db.Model):
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
-    username = db.Column(
-        db.String(50),
-        unique=True,
-        nullable=False
-    )
 
-    password = db.Column(
-        db.String(255),
-        nullable=False
-    )
+# =========================================================
+# ACTIVITY LOG TABLE
+# =========================================================
+
+class ActivityLog(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    action = db.Column(db.String(50), nullable=False)
+    target = db.Column(db.String(150), nullable=False)
+    performed_by = db.Column(db.String(50), nullable=False)
+    timestamp = db.Column(db.DateTime, server_default=db.func.now())
+
+
+def log_activity(action, target, performed_by="system"):
+    entry = ActivityLog(action=action, target=target, performed_by=performed_by)
+    db.session.add(entry)
+    db.session.commit()
 
 
 # =========================================================
@@ -92,7 +80,6 @@ with app.app_context():
 
 @app.route("/")
 def home():
-
     return jsonify({
         "message": "Student Management System API is running"
     })
@@ -106,11 +93,9 @@ def home():
 def get_students():
 
     students = Student.query.all()
-
     result = []
 
     for student in students:
-
         result.append({
             "id": student.id,
             "name": student.name,
@@ -132,9 +117,7 @@ def add_student():
     data = request.get_json()
 
     if not data:
-        return jsonify({
-            "message": "No data received"
-        }), 400
+        return jsonify({"message": "No data received"}), 400
 
     name = data.get("name", "").strip()
     email = data.get("email", "").strip()
@@ -142,30 +125,19 @@ def add_student():
     year = data.get("year", "").strip()
 
     if not name or not email or not course or not year:
-        return jsonify({
-            "message": "All fields are required"
-        }), 400
+        return jsonify({"message": "All fields are required"}), 400
 
-    # Check duplicate email
-    existing_student = Student.query.filter_by(
-        email=email
-    ).first()
+    existing_student = Student.query.filter_by(email=email).first()
 
     if existing_student:
+        return jsonify({"message": "A student with this email already exists"}), 400
 
-        return jsonify({
-            "message": "A student with this email already exists"
-        }), 400
-
-    new_student = Student(
-        name=name,
-        email=email,
-        course=course,
-        year=year
-    )
+    new_student = Student(name=name, email=email, course=course, year=year)
 
     db.session.add(new_student)
     db.session.commit()
+
+    log_activity("added student", name)
 
     return jsonify({
         "message": "Student added successfully",
@@ -183,17 +155,16 @@ def delete_student(student_id):
     student = Student.query.get(student_id)
 
     if not student:
+        return jsonify({"message": "Student not found"}), 404
 
-        return jsonify({
-            "message": "Student not found"
-        }), 404
+    student_name = student.name
 
     db.session.delete(student)
     db.session.commit()
 
-    return jsonify({
-        "message": "Student deleted successfully"
-    })
+    log_activity("deleted student", student_name)
+
+    return jsonify({"message": "Student deleted successfully"})
 
 
 # =========================================================
@@ -206,18 +177,12 @@ def update_student(student_id):
     student = Student.query.get(student_id)
 
     if not student:
-
-        return jsonify({
-            "message": "Student not found"
-        }), 404
+        return jsonify({"message": "Student not found"}), 404
 
     data = request.get_json()
 
     if not data:
-
-        return jsonify({
-            "message": "No data received"
-        }), 400
+        return jsonify({"message": "No data received"}), 400
 
     name = data.get("name", "").strip()
     email = data.get("email", "").strip()
@@ -225,21 +190,12 @@ def update_student(student_id):
     year = data.get("year", "").strip()
 
     if not name or not email or not course or not year:
+        return jsonify({"message": "All fields are required"}), 400
 
-        return jsonify({
-            "message": "All fields are required"
-        }), 400
-
-    # Check duplicate email
-    existing_student = Student.query.filter_by(
-        email=email
-    ).first()
+    existing_student = Student.query.filter_by(email=email).first()
 
     if existing_student and existing_student.id != student_id:
-
-        return jsonify({
-            "message": "Another student already uses this email"
-        }), 400
+        return jsonify({"message": "Another student already uses this email"}), 400
 
     student.name = name
     student.email = email
@@ -248,9 +204,9 @@ def update_student(student_id):
 
     db.session.commit()
 
-    return jsonify({
-        "message": "Student updated successfully"
-    })
+    log_activity("edited student", name)
+
+    return jsonify({"message": "Student updated successfully"})
 
 
 # =========================================================
@@ -262,164 +218,109 @@ def dashboard():
 
     total_students = Student.query.count()
 
-    bca = Student.query.filter_by(
-        course="BCA"
-    ).count()
-
-    btech = Student.query.filter_by(
-        course="B.Tech"
-    ).count()
-
-    mca = Student.query.filter_by(
-        course="MCA"
-    ).count()
-
-    mtech = Student.query.filter_by(
-        course="M.Tech"
-    ).count()
+    bca = Student.query.filter_by(course="BCA").count()
+    btech = Student.query.filter_by(course="B.Tech").count()
+    mca = Student.query.filter_by(course="MCA").count()
+    mtech = Student.query.filter_by(course="M.Tech").count()
 
     if total_students > 0:
-
-        bca_percentage = round(
-            (bca / total_students) * 100,
-            1
-        )
-
-        btech_percentage = round(
-            (btech / total_students) * 100,
-            1
-        )
-
-        mca_percentage = round(
-            (mca / total_students) * 100,
-            1
-        )
-
-        mtech_percentage = round(
-            (mtech / total_students) * 100,
-            1
-        )
-
+        bca_percentage = round((bca / total_students) * 100, 1)
+        btech_percentage = round((btech / total_students) * 100, 1)
+        mca_percentage = round((mca / total_students) * 100, 1)
+        mtech_percentage = round((mtech / total_students) * 100, 1)
     else:
-
         bca_percentage = 0
         btech_percentage = 0
         mca_percentage = 0
         mtech_percentage = 0
 
     return jsonify({
-
         "total_students": total_students,
-
         "courses": {
-
-            "BCA": {
-                "students": bca,
-                "percentage": bca_percentage
-            },
-
-            "B.Tech": {
-                "students": btech,
-                "percentage": btech_percentage
-            },
-
-            "MCA": {
-                "students": mca,
-                "percentage": mca_percentage
-            },
-
-            "M.Tech": {
-                "students": mtech,
-                "percentage": mtech_percentage
-            }
+            "BCA": {"students": bca, "percentage": bca_percentage},
+            "B.Tech": {"students": btech, "percentage": btech_percentage},
+            "MCA": {"students": mca, "percentage": mca_percentage},
+            "M.Tech": {"students": mtech, "percentage": mtech_percentage}
         }
     })
 
 
 # =========================================================
-# LOGIN
+# ACTIVITY LOGS
 # =========================================================
+
+@app.route("/activity-logs", methods=["GET"])
+def get_activity_logs():
+
+    logs = ActivityLog.query.order_by(ActivityLog.timestamp.desc()).all()
+    result = []
+
+    for log in logs:
+        result.append({
+            "action": log.action,
+            "target": log.target,
+            "performed_by": log.performed_by,
+            "timestamp": log.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        })
+
+    return jsonify(result)
+
+
+# =========================================================
+# SIGNUP (legacy route, kept as-is)
+# =========================================================
+
 @app.route("/signup", methods=["POST"])
 def signup():
+
     data = request.get_json()
 
     username = data.get("username", "").strip()
     password = data.get("password", "").strip()
 
     if not username or not password:
-        return jsonify({
-            "message": "Username and password are required"
-        }), 400
+        return jsonify({"message": "Username and password are required"}), 400
 
-    # Check if username already exists
     existing_user = User.query.filter_by(username=username).first()
 
     if existing_user:
-        return jsonify({
-            "message": "Username already exists"
-        }), 400
+        return jsonify({"message": "Username already exists"}), 400
 
-    # Hash password and create user
     hashed_password = generate_password_hash(password)
 
-    new_user = User(
-        username=username,
-        password=hashed_password
-    )
+    new_user = User(username=username, password=hashed_password)
 
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({
-        "message": "Account created successfully"
-    }), 201
+    return jsonify({"message": "Account created successfully"}), 201
+
+
+# =========================================================
+# LOGIN
+# =========================================================
+
 @app.route("/login", methods=["POST"])
 def login():
 
     data = request.get_json()
 
     if not data:
+        return jsonify({"message": "No data received"}), 400
 
-        return jsonify({
-            "message": "No data received"
-        }), 400
-
-    username = data.get(
-        "username",
-        ""
-    ).strip()
-
-    password = data.get(
-        "password",
-        ""
-    )
+    username = data.get("username", "").strip()
+    password = data.get("password", "")
 
     if not username or not password:
+        return jsonify({"message": "Username and password are required"}), 400
 
-        return jsonify({
-            "message": "Username and password are required"
-        }), 400
-
-    # Find user in database
-    user = User.query.filter_by(
-        username=username
-    ).first()
+    user = User.query.filter_by(username=username).first()
 
     if not user:
+        return jsonify({"message": "Invalid username or password"}), 401
 
-        return jsonify({
-            "message": "Invalid username or password"
-        }), 401
-
-    # Check hashed password
-    if not check_password_hash(
-        user.password,
-        password
-    ):
-
-        return jsonify({
-            "message": "Invalid username or password"
-        }), 401
+    if not check_password_hash(user.password, password):
+        return jsonify({"message": "Invalid username or password"}), 401
 
     return jsonify({
         "message": "Login successful",
@@ -428,11 +329,8 @@ def login():
 
 
 # =========================================================
-# START FLASK SERVER
-# =========================================================
-# -----------------------------------
 # REGISTER USER
-# -----------------------------------
+# =========================================================
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -440,44 +338,37 @@ def register():
     data = request.get_json()
 
     if not data:
-        return jsonify({
-            "message": "No data received"
-        }), 400
+        return jsonify({"message": "No data received"}), 400
 
     username = data.get("username", "").strip()
     password = data.get("password", "")
 
     if not username or not password:
-        return jsonify({
-            "message": "Username and password are required"
-        }), 400
+        return jsonify({"message": "Username and password are required"}), 400
 
-    # Check if username already exists
-    existing_user = User.query.filter_by(
-        username=username
-    ).first()
+    existing_user = User.query.filter_by(username=username).first()
 
     if existing_user:
-        return jsonify({
-            "message": "Username already exists"
-        }), 400
+        return jsonify({"message": "Username already exists"}), 400
 
-    # Hash password before storing
     hashed_password = generate_password_hash(password)
 
-    new_user = User(
-        username=username,
-        password=hashed_password
-    )
+    new_user = User(username=username, password=hashed_password)
 
     db.session.add(new_user)
     db.session.commit()
+
+    log_activity("registered", username, performed_by=username)
 
     return jsonify({
         "message": "Account created successfully",
         "username": username
     }), 201
 
-if __name__ == "__main__":
 
+# =========================================================
+# START FLASK SERVER
+# =========================================================
+
+if __name__ == "__main__":
     app.run(debug=True)
