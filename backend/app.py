@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # =========================================================
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "https://gorgeous-trifle-df0ba2.netlify.app"], supports_credentials=True)
+CORS(app, origins=["http://localhost:5173", "https://student-management-system-yathi.netlify.app"], supports_credentials=True)
 # Allow React frontend to communicate with Flask
 
 
